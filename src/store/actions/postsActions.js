@@ -25,12 +25,36 @@ export const postsFailure = error => {
 
 export function postsFetch() {
   return dispatch => {
-    console.log("posts fetch");
+    console.log("posts  fetch");
     dispatch(postsRequest());
 
-    axios.get(`${config.domain}posts`).then(result => {
-      console.log("result posts", result.data);
-      dispatch(postsSuccess(result.data));
-    });
+    const getPosts = () => {
+      return axios.get(`${config.domain}posts`);
+    };
+
+    const getComments = () => {
+      return axios.get(`${config.domain}comments`);
+    };
+
+    axios.all([getPosts(), getComments()]).then(
+      axios.spread(function(resPosts, resComments) {
+        let posts = resPosts.data;
+        let comments = resComments.data;
+        let newPosts = [...posts];
+
+        posts.map((postItem, k) => {
+          newPosts[k].commentCount = 0;
+          newPosts[k].comments = [];
+          comments.map(commentItem => {
+            if (postItem.id === commentItem.postId) {
+              newPosts[k].commentCount = newPosts[k].commentCount + 1;
+              newPosts[k].comments.push(commentItem);
+            }
+          });
+        });
+
+        dispatch(postsSuccess(newPosts));
+      })
+    );
   };
 }
