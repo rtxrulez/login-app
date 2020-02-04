@@ -1,6 +1,5 @@
 import axios from "axios";
 import config from "../../config/config";
-import { Redirect } from "react-router-dom";
 
 export const loginedRequest = () => {
   return {

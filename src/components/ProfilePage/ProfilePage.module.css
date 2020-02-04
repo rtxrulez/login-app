@@ -1,0 +1,18 @@
+.content {
+  margin: 20px 15px;
+}
+
+.logo {
+  font-size: 2em;
+  text-decoration: none;
+  color: var(--white);
+}
+
+.logo:hover {
+  color: var(--white);
+  opacity: 0.8;
+}
+
+.header {
+  padding: 0 15px;
+}

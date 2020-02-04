@@ -11,7 +11,6 @@ class LoginPageContainer extends Component {
   };
 
   componentDidMount() {
-    console.log("storage", localStorage.getItem("isUserAuth"));
     if (localStorage.getItem("isUserAuth") === "true") {
       const data = {
         login: localStorage.getItem("login"),
@@ -41,8 +40,6 @@ class LoginPageContainer extends Component {
   render() {
     let { login, pass } = this.state;
 
-    console.log("isUserAuth", this.props.isUserAuth);
-
     let validate = true;
     if (login !== "" && pass !== "") {
       validate = false;
@@ -63,11 +60,12 @@ class LoginPageContainer extends Component {
 }
 
 const mapStateToProps = store => {
+  console.log("store", store);
   return {
-    isLoginCorrect: store.isLoginCorrect,
-    isFetching: store.isFetching,
-    isFetched: store.isFetched,
-    isUserAuth: store.isUserAuth
+    isLoginCorrect: store.logined.isLoginCorrect,
+    isFetching: store.logined.isFetching,
+    isFetched: store.logined.isFetched,
+    isUserAuth: store.logined.isUserAuth
   };
 };
 

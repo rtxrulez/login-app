@@ -1,0 +1,16 @@
+.posts {
+  min-height: 100px;
+}
+.footer {
+  margin-top: 10px;
+}
+
+.btn {
+  margin-left: 15px;
+}
+
+.postsItem {
+  border: 1px solid var(--gray);
+  padding: 10px;
+  margin: 20px 0;
+}
