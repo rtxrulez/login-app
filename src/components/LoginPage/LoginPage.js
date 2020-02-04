@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import css from "./LoginPage.module.css";
 import config from "../../config/config";
-import { Input, Button, notification } from "antd";
+import { Input, Button, notification, Spin } from "antd";
 
 const errorMsg = {
   duration: config.durationNoty,
@@ -30,39 +30,42 @@ class LoginPage extends Component {
   };
 
   render() {
-    const { valid } = this.props;
+    const { valid, isFetching, isFetched } = this.props;
+    // console.log("pr", this.props);
 
     return (
       <div className={css.LoginPage}>
         <div className={css.widget}>
-          <h2 className={css.head}>Авторизация</h2>
-          <form className={css.form}>
-            <div className={css.input}>
-              <Input
-                onChange={this.handleLogin}
-                size="large"
-                placeholder="Логин"
-              />
-            </div>
-            <div className={css.input}>
-              <Input
-                onChange={this.handlePass}
-                size="large"
-                placeholder="Пароль"
-              />
-            </div>
-            <div className={css.input}>
-              <Button
-                disabled={valid}
-                onClick={this.onSubmit}
-                size="large"
-                type="primary"
-                block
-              >
-                Войти
-              </Button>
-            </div>
-          </form>
+          <Spin spinning={isFetching} delay={10}>
+            <form onSubmit={this.onSubmit} className={css.form}>
+              <h2 className={css.head}>Авторизация</h2>
+              <div className={css.input}>
+                <Input
+                  onChange={this.handleLogin}
+                  size="large"
+                  placeholder="Логин"
+                />
+              </div>
+              <div className={css.input}>
+                <Input
+                  onChange={this.handlePass}
+                  size="large"
+                  placeholder="Пароль"
+                />
+              </div>
+              <div className={css.input}>
+                <Button
+                  disabled={valid}
+                  onClick={this.onSubmit}
+                  size="large"
+                  type="primary"
+                  block
+                >
+                  Войти
+                </Button>
+              </div>
+            </form>
+          </Spin>
         </div>
       </div>
     );

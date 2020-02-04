@@ -7,6 +7,7 @@ import {
 } from "../actions/loginedActions";
 
 let defaultData = {
+  isUserAuth: false,
   isFetched: false,
   isFetching: false,
   error: false,
@@ -26,7 +27,8 @@ export default (state = defaultData, action) => {
       return {
         ...state,
         isFetched: true,
-        isFetching: false
+        isFetching: false,
+        isUserAuth: true
       };
 
     case loginedFailure().type:

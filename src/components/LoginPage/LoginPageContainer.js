@@ -2,12 +2,26 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { loginedFetch } from "../../store/actions/loginedActions";
 import LoginPage from "./LoginPage";
+import { Redirect } from "react-router-dom";
 
 class LoginPageContainer extends Component {
   state = {
     login: "",
     pass: ""
   };
+
+  componentDidMount() {
+    console.log("storage", localStorage.getItem("isUserAuth"));
+    if (localStorage.getItem("isUserAuth") === "true") {
+      const data = {
+        login: localStorage.getItem("login"),
+        pass: localStorage.getItem("pass")
+      };
+
+      this.props.requestLogin(data);
+    }
+  }
+
   onChangeLogin = login => {
     this.setState({
       login: login
@@ -25,7 +39,9 @@ class LoginPageContainer extends Component {
   };
 
   render() {
-    let { login, pass, isLoginCorrect } = this.state;
+    let { login, pass } = this.state;
+
+    console.log("isUserAuth", this.props.isUserAuth);
 
     let validate = true;
     if (login !== "" && pass !== "") {
@@ -33,9 +49,9 @@ class LoginPageContainer extends Component {
     }
     return (
       <div>
+        {this.props.isUserAuth ? <Redirect to="/profile" /> : ""}
         <LoginPage
           valid={validate}
-          isLoginCorrect={isLoginCorrect}
           onChangeLogin={this.onChangeLogin}
           onChangePass={this.onChangePass}
           onSubmitLogined={this.onSubmitLogined}
@@ -48,7 +64,10 @@ class LoginPageContainer extends Component {
 
 const mapStateToProps = store => {
   return {
-    isLoginCorrect: store.isLoginCorrect
+    isLoginCorrect: store.isLoginCorrect,
+    isFetching: store.isFetching,
+    isFetched: store.isFetched,
+    isUserAuth: store.isUserAuth
   };
 };
 

@@ -1,5 +1,6 @@
 import axios from "axios";
 import config from "../../config/config";
+import { Redirect } from "react-router-dom";
 
 export const loginedRequest = () => {
   return {
@@ -48,27 +49,36 @@ export const loginedSave = payload => {
   };
 };
 
+export function saveStorage(data) {
+  return dispatch => {
+    localStorage.setItem("login", data.login);
+    localStorage.setItem("pass", data.pass);
+    localStorage.setItem("isUserAuth", true);
+
+    dispatch(loginedSuccess());
+  };
+}
+
 export function loginedFetch(loginFormData) {
   console.log("Data Login", loginFormData);
   return dispatch => {
     dispatch(loginedRequest());
 
     axios.get(`${config.domain}profile`).then(result => {
-      console.log("load list: ", result.data.name);
-
       if (
         result.data.name === loginFormData.login &&
         config.pass === loginFormData.pass
       ) {
-        console.log("OKKK");
+        // сохранение в localStorage
+        dispatch(saveStorage(loginFormData));
       } else {
         dispatch(loginedIncorrect());
+
         setTimeout(() => {
           dispatch(loginedCorrect());
+          dispatch(loginedFailure());
         }, config.durationNoty * 1000);
       }
-      // dispatch(addToListSinga(result.data));
-      // dispatch(loadSingaSuccess());
     });
 
     // setTimeout(() => {
