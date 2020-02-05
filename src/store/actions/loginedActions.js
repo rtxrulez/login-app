@@ -68,7 +68,7 @@ export function loginedFetch(loginFormData) {
           // сохранение в localStorage
           dispatch(saveStorage(loginFormData));
         } else {
-          dispatch(loginedFailure("Не верный логин или пароль"));
+          dispatch(loginedFailure("Неверный логин или пароль"));
           dispatch(loginedFailureDestroy());
         }
       })
