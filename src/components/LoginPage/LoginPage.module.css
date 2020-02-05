@@ -9,7 +9,7 @@
 .widget {
   max-width: 400px;
   width: 100%;
-  border: 1px solid var(--gray);
+  border: 1px solid var(--primary);
   border-radius: 4px;
   padding: 15px 20px;
 }
