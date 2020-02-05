@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import "antd/dist/antd.css";
 import LoginPageContainer from "./components/LoginPage/LoginPageContainer";
