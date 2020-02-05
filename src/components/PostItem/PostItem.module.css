@@ -1,0 +1,21 @@
+.item {
+  margin: 20px 0;
+  font-size: 20px;
+}
+
+.comments {
+  font-size: 18px;
+  margin: 10px 10px 10px 35px;
+}
+
+.btn {
+  margin-left: 15px;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
