@@ -1,4 +1,4 @@
-Тестовый прект на основе [Create React App](https://github.com/facebook/create-react-app).
+Тестовый прект, в ознакомительных целях на основе [Create React App](https://github.com/facebook/create-react-app).
 Открыть приложение можно по ссылке [https://rtxrulez.github.io/login-app/](https://rtxrulez.github.io/login-app/)
 
 ## Установка скриптов
@@ -34,5 +34,5 @@
 
 ## Для deploy на gh-pages
 
-Просто выполнить команду `npm run deploy` и статическая версия приложения загрузится на отдельную ветку gh-pages.
+Просто выполнить команду сначала `npm run build` и за тем `npm run deploy` и статическая версия приложения загрузится на отдельную ветку gh-pages.
 Получить доступ к ней можно по ссылке [https://rtxrulez.github.io/login-app/](https://rtxrulez.github.io/login-app/)
