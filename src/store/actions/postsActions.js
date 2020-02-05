@@ -67,8 +67,9 @@ export function postsFetch() {
         })
       )
       .catch(error => {
-        console.log("err", error);
+        console.log("error: ", error);
         dispatch(postsFailure(error.toString()));
+        dispatch(postsFailureDestroy());
       });
   };
 }

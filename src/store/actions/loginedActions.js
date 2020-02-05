@@ -69,18 +69,12 @@ export function loginedFetch(loginFormData) {
           dispatch(saveStorage(loginFormData));
         } else {
           dispatch(loginedFailure("Не верный логин или пароль"));
-
-          setTimeout(() => {
-            dispatch(loginedFailureDestroy());
-          }, config.durationNoty * 1000);
+          dispatch(loginedFailureDestroy());
         }
       })
       .catch(function(error) {
         dispatch(loginedFailure(error.toString()));
-
-        setTimeout(() => {
-          dispatch(loginedFailureDestroy());
-        }, config.durationNoty * 1000);
+        dispatch(loginedFailureDestroy());
       });
   };
 }

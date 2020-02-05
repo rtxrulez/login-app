@@ -5,14 +5,16 @@
 .logo {
   font-size: 2em;
   text-decoration: none;
-  color: var(--white);
+  color: var(--success);
 }
 
 .logo:hover {
-  color: var(--white);
+  color: var(--success);
   opacity: 0.8;
 }
 
 .header {
+  background-color: white;
+  border-bottom: 1px solid var(--primary);
   padding: 0 15px;
 }

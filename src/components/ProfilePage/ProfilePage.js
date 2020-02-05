@@ -7,20 +7,18 @@ const { Header, Content } = Layout;
 class ProfilePage extends Component {
   render() {
     return (
-      <div>
-        <Layout>
-          <Header className={css.header}>
-            <a className={css.logo} href="/profile">
-              Profile News
-            </a>
-          </Header>
-          <Layout>
-            <Content className={css.content}>
-              <News />
-            </Content>
-          </Layout>
+      <Layout className={css.layout}>
+        <Header className={css.header}>
+          <a className={css.logo} href="/profile">
+            Profile News
+          </a>
+        </Header>
+        <Layout className={css.layout}>
+          <Content className={css.content}>
+            <News />
+          </Content>
         </Layout>
-      </div>
+      </Layout>
     );
   }
 }
