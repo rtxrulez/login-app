@@ -1,4 +1,5 @@
 Тестовый прект на основе [Create React App](https://github.com/facebook/create-react-app).
+Открыть приложение можно по ссылке [https://rtxrulez.github.io/login-app/](https://rtxrulez.github.io/login-app/)
 
 ## Установка скриптов
 
@@ -30,3 +31,8 @@
 ## Заметки по разработке.
 
 В этом проекте я в первый раз применил библиотеку Ant Design. И в первый раз расширил create react app через настройку overrides для того чтобы не классическую работу CRA и не загружать большие настройки webpack.
+
+## Для deploy на gh-pages
+
+Просто выполнить команду `npm run deploy` и статическая версия приложения загрузится на отдельную ветку gh-pages.
+Получить доступ к ней можно по ссылке [https://rtxrulez.github.io/login-app/](https://rtxrulez.github.io/login-app/)
