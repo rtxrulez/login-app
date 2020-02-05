@@ -9,19 +9,21 @@ class PostsContainer extends Component {
   }
 
   render() {
-    const { posts, isFetched } = this.props.posts;
+    const { posts, isFetched, error } = this.props.posts;
 
     return (
       <div>
-        <Posts isFetched={!isFetched} posts={posts} />
+        <Posts error={error} isFetched={!isFetched} posts={posts} />
       </div>
     );
   }
 }
 
 const mapStateToProps = store => {
+  console.log("sr", store);
   return {
-    posts: store.posts
+    posts: store.posts,
+    error: store.posts.posts.error
   };
 };
 

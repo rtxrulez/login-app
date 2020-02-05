@@ -1,7 +1,8 @@
 import {
   postsRequest,
   postsFailure,
-  postsSuccess
+  postsSuccess,
+  postsFailureDestroy
 } from "../actions/postsActions";
 
 let defaultData = {
@@ -17,7 +18,8 @@ export default (state = defaultData, action) => {
       return {
         ...state,
         isFetched: false,
-        isFetching: true
+        isFetching: true,
+        error: false
       };
 
     case postsSuccess().type:
@@ -25,7 +27,8 @@ export default (state = defaultData, action) => {
         ...state,
         posts: [...action.payload],
         isFetched: true,
-        isFetching: false
+        isFetching: false,
+        error: false
       };
 
     case postsFailure().type:
@@ -34,6 +37,12 @@ export default (state = defaultData, action) => {
         isFetched: true,
         isFetching: false,
         error: action.error
+      };
+
+    case postsFailureDestroy().type:
+      return {
+        ...state,
+        error: false
       };
 
     default:

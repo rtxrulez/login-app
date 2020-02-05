@@ -2,16 +2,14 @@ import {
   loginedRequest,
   loginedFailure,
   loginedSuccess,
-  loginedCorrect,
-  loginedIncorrect
+  loginedFailureDestroy
 } from "../actions/loginedActions";
 
 let defaultData = {
   isUserAuth: false,
   isFetched: false,
   isFetching: false,
-  error: false,
-  isLoginCorrect: true
+  error: false
 };
 
 export default (state = defaultData, action) => {
@@ -20,7 +18,8 @@ export default (state = defaultData, action) => {
       return {
         ...state,
         isFetched: false,
-        isFetching: true
+        isFetching: true,
+        error: false
       };
 
     case loginedSuccess().type:
@@ -28,7 +27,8 @@ export default (state = defaultData, action) => {
         ...state,
         isFetched: true,
         isFetching: false,
-        isUserAuth: true
+        isUserAuth: true,
+        error: false
       };
 
     case loginedFailure().type:
@@ -39,16 +39,10 @@ export default (state = defaultData, action) => {
         error: action.error
       };
 
-    case loginedCorrect().type:
+    case loginedFailureDestroy().type:
       return {
         ...state,
-        isLoginCorrect: true
-      };
-
-    case loginedIncorrect().type:
-      return {
-        ...state,
-        isLoginCorrect: false
+        error: action.error
       };
 
     default:

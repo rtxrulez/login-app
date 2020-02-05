@@ -62,7 +62,7 @@ class LoginPageContainer extends Component {
 const mapStateToProps = store => {
   console.log("store", store);
   return {
-    isLoginCorrect: store.logined.isLoginCorrect,
+    error: store.logined.error,
     isFetching: store.logined.isFetching,
     isFetched: store.logined.isFetched,
     isUserAuth: store.logined.isUserAuth

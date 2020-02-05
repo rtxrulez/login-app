@@ -11,13 +11,16 @@ const errorMsg = {
 
 class LoginPage extends Component {
   componentWillReceiveProps(nextProps) {
-    if (!nextProps.isLoginCorrect) {
+    if (nextProps.error) {
+      console.log(nextProps.error);
+      errorMsg.description = nextProps.error;
+      notification.destroy();
       notification.error(errorMsg);
     }
   }
 
-  onSubmit = () => {
-    console.log("submit");
+  onSubmit = e => {
+    e.preventDefault();
     this.props.onSubmitLogined();
   };
 
@@ -30,8 +33,7 @@ class LoginPage extends Component {
   };
 
   render() {
-    const { valid, isFetching, isFetched } = this.props;
-    // console.log("pr", this.props);
+    const { valid, isFetching } = this.props;
 
     return (
       <div className={css.LoginPage}>
@@ -59,6 +61,7 @@ class LoginPage extends Component {
                   onClick={this.onSubmit}
                   size="large"
                   type="primary"
+                  htmlType="submit"
                   block
                 >
                   Войти

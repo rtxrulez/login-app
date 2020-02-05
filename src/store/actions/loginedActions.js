@@ -23,15 +23,11 @@ export const loginedFailure = error => {
   };
 };
 
-export const loginedCorrect = () => {
+export const loginedFailureDestroy = () => {
   return {
-    type: "LOGINED_CORRECT"
-  };
-};
-
-export const loginedIncorrect = () => {
-  return {
-    type: "LOGINED_INCORRECT"
+    type: "LOGINED_FAILURE_DESTROY",
+    payload: "",
+    error: false
   };
 };
 
@@ -59,29 +55,32 @@ export function saveStorage(data) {
 }
 
 export function loginedFetch(loginFormData) {
-  console.log("Data Login", loginFormData);
   return dispatch => {
     dispatch(loginedRequest());
 
-    axios.get(`${config.domain}profile`).then(result => {
-      if (
-        result.data.name === loginFormData.login &&
-        config.pass === loginFormData.pass
-      ) {
-        // сохранение в localStorage
-        dispatch(saveStorage(loginFormData));
-      } else {
-        dispatch(loginedIncorrect());
+    axios
+      .get(`${config.domain}profile`)
+      .then(result => {
+        if (
+          result.data.name === loginFormData.login &&
+          config.pass === loginFormData.pass
+        ) {
+          // сохранение в localStorage
+          dispatch(saveStorage(loginFormData));
+        } else {
+          dispatch(loginedFailure("Не верный логин или пароль"));
+
+          setTimeout(() => {
+            dispatch(loginedFailureDestroy());
+          }, config.durationNoty * 1000);
+        }
+      })
+      .catch(function(error) {
+        dispatch(loginedFailure(error.toString()));
 
         setTimeout(() => {
-          dispatch(loginedCorrect());
-          dispatch(loginedFailure());
+          dispatch(loginedFailureDestroy());
         }, config.durationNoty * 1000);
-      }
-    });
-
-    // setTimeout(() => {
-    //   dispatch(loginedSuccess());
-    // }, 2000);
+      });
   };
 }

@@ -23,6 +23,14 @@ export const postsFailure = error => {
   };
 };
 
+export const postsFailureDestroy = () => {
+  return {
+    type: "POSTS_FAILURE_DESTROY",
+    payload: "",
+    error: false
+  };
+};
+
 export function postsFetch() {
   return dispatch => {
     console.log("posts  fetch");
@@ -36,25 +44,31 @@ export function postsFetch() {
       return axios.get(`${config.domain}comments`);
     };
 
-    axios.all([getPosts(), getComments()]).then(
-      axios.spread(function(resPosts, resComments) {
-        let posts = resPosts.data;
-        let comments = resComments.data;
-        let newPosts = [...posts];
+    axios
+      .all([getPosts(), getComments()])
+      .then(
+        axios.spread(function(resPosts, resComments) {
+          let posts = resPosts.data;
+          let comments = resComments.data;
+          let newPosts = [...posts];
 
-        posts.map((postItem, k) => {
-          newPosts[k].commentCount = 0;
-          newPosts[k].comments = [];
-          comments.map(commentItem => {
-            if (postItem.id === commentItem.postId) {
-              newPosts[k].commentCount = newPosts[k].commentCount + 1;
-              newPosts[k].comments.push(commentItem);
-            }
+          posts.map((postItem, k) => {
+            newPosts[k].commentCount = 0;
+            newPosts[k].comments = [];
+            comments.map(commentItem => {
+              if (postItem.id === commentItem.postId) {
+                newPosts[k].commentCount = newPosts[k].commentCount + 1;
+                newPosts[k].comments.push(commentItem);
+              }
+            });
           });
-        });
 
-        dispatch(postsSuccess(newPosts));
-      })
-    );
+          dispatch(postsSuccess(newPosts));
+        })
+      )
+      .catch(error => {
+        console.log("err", error);
+        dispatch(postsFailure(error.toString()));
+      });
   };
 }
