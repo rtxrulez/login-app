@@ -33,7 +33,6 @@ export const postsFailureDestroy = () => {
 
 export function postsFetch() {
   return dispatch => {
-    console.log("posts  fetch");
     dispatch(postsRequest());
 
     const getPosts = () => {
@@ -52,9 +51,12 @@ export function postsFetch() {
           let comments = resComments.data;
           let newPosts = [...posts];
 
+          // eslint-disable-next-line
           posts.map((postItem, k) => {
             newPosts[k].commentCount = 0;
             newPosts[k].comments = [];
+
+            // eslint-disable-next-line
             comments.map(commentItem => {
               if (postItem.id === commentItem.postId) {
                 newPosts[k].commentCount = newPosts[k].commentCount + 1;
@@ -67,7 +69,6 @@ export function postsFetch() {
         })
       )
       .catch(error => {
-        console.log("error: ", error);
         dispatch(postsFailure(error.toString()));
         dispatch(postsFailureDestroy());
       });

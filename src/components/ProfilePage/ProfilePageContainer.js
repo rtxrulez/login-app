@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { loginedFetch } from "../../store/actions/loginedActions";
 import ProfilePage from "./ProfilePage";
 
 class ProfilePageContainer extends Component {

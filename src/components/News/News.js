@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PostsContainer from "../Posts/PostsContainer";
 import css from "./News.module.css";
 
